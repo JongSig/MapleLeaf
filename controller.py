@@ -1,4 +1,5 @@
 
+import os
 from PIL import Image, ImageTk
 import requests
 from io import BytesIO
@@ -39,8 +40,10 @@ def get_character_info(character_name, ocid):
         return None
     
 def load_default_image():
-    image = Image.open("d:/Develop/Maple_leaf/Silhouette.png")
-    image = image.resize((150, 150))
+    base_path = os.path.dirname(os.path.abspath(__file__)) # 현재 파일
+    image_path = os.path.join(base_path, "Silhouette.png") # os에 맞게 경로 설정
+    image = Image.open(image_path)
+    image = image.resize((150, 200))
     photo = ImageTk.PhotoImage(image)
     return photo
 
