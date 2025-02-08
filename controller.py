@@ -3,14 +3,15 @@ import os
 from PIL import Image, ImageTk
 import requests
 from io import BytesIO
+from dotenv import load_dotenv
 
 # 정보 불러오기
-
+load_dotenv()
 
 def get_character_ocid(character_name):
     url = "https://open.api.nexon.com/maplestory/v1/id"
     headers = {
-        "x-nxopen-api-key" : "test_4e33876e2544afca7e1aa236c57426f6c742ee8e0fae933eb1351e69b999fd34efe8d04e6d233bd35cf2fabdeb93fb0d"
+        "x-nxopen-api-key" : os.getenv("NEXON_API_KEY")
     }
     params = {
         "character_name" : character_name
@@ -25,7 +26,7 @@ def get_character_ocid(character_name):
 def get_character_info(character_name, ocid):
     url = "https://open.api.nexon.com/maplestory/v1/character/basic"
     headers = {
-        "x-nxopen-api-key" : "test_4e33876e2544afca7e1aa236c57426f6c742ee8e0fae933eb1351e69b999fd34efe8d04e6d233bd35cf2fabdeb93fb0d"
+        "x-nxopen-api-key" : os.getenv("NEXON_API_KEY")
     }
     params = {
         "character_name" : character_name,
@@ -64,7 +65,7 @@ def load_image(url):
         image = image.resize((200, 200))
         return ImageTk.PhotoImage(image)
     except Exception as e:
-        print("이미지를 불러오는 중 오류 방생:", e)
+        print("이미지를 불러오는 중 오류 발생:", e)
         return None
 
 def search_character_ocid(character_name):
