@@ -41,9 +41,9 @@ def get_character_info(character_name, ocid):
     
 def load_default_image():
     base_path = os.path.dirname(os.path.abspath(__file__)) # 현재 파일
-    image_path = os.path.join(base_path, "Silhouette.png") # os에 맞게 경로 설정
+    image_path = os.path.join(base_path, "mushroom.png") # os에 맞게 경로 설정
     image = Image.open(image_path)
-    image = image.resize((150, 200))
+    image = image.resize((150, 150))
     photo = ImageTk.PhotoImage(image)
     return photo
 
