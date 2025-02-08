@@ -6,9 +6,14 @@ from io import BytesIO
 from dotenv import load_dotenv
 
 # 정보 불러오기
-load_dotenv()
+
+def get_path_env():
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    env_path = os.path.join( BASE_DIR, ".env.development.txt")
+    return env_path
 
 def get_character_ocid(character_name):
+    load_dotenv(get_path_env())
     url = "https://open.api.nexon.com/maplestory/v1/id"
     headers = {
         "x-nxopen-api-key" : os.getenv("NEXON_API_KEY")
@@ -24,6 +29,7 @@ def get_character_ocid(character_name):
         return None
 
 def get_character_info(character_name, ocid):
+    load_dotenv(get_path_env())
     url = "https://open.api.nexon.com/maplestory/v1/character/basic"
     headers = {
         "x-nxopen-api-key" : os.getenv("NEXON_API_KEY")
